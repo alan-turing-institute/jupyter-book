@@ -1,4 +1,23 @@
+---
+jupytext:
+  cell_metadata_filter: -all
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.11.5
+kernelspec:
+  display_name: Python 3 (ipykernel)
+  language: python
+  name: python3
+---
+
 # Markdown Files
+
+```{note}
+Here is a note from Turing
+```
 
 Whether you write your book's content in Jupyter Notebooks (`.ipynb`) or
 in regular markdown files (`.md`), you'll write in the same flavor of markdown
@@ -52,6 +71,7 @@ In your built book.
 For more information on writing directives, see the
 [MyST documentation](https://myst-parser.readthedocs.io/).
 
++++
 
 ### Using a role
 
@@ -71,6 +91,7 @@ role syntax `` {doc}`intro` `` will result in: {doc}`intro`.
 For more information on writing roles, see the
 [MyST documentation](https://myst-parser.readthedocs.io/).
 
++++
 
 ### Adding a citation
 
@@ -94,6 +115,7 @@ Resulting in a rendered bibliography that looks like:
 ```{bibliography}
 ```
 
++++
 
 ### Executing code in your markdown files
 
@@ -113,11 +135,20 @@ directive to run the code at build time:
 
 ````
 ```{code-cell}
-print("Here is some code to execute")
+print("1+1=", 1+1)
 ```
 ````
 
-When your book is built, the contents of any `{code-cell}` blocks will be
+````{code-cell}
+print("1+1=", 1+2)
+````
+
+
+````{code-cellx}
+print("1+1=", 1+1)
+````
+
+When your book is built (are they), the contents of any `{code-cell}` blocks will be
 executed with your default Jupyter kernel, and their outputs will be displayed
 in-line with the rest of your content.
 

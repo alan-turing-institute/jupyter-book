@@ -37,7 +37,7 @@ def build_sphinx(
     builder="html",
     freshenv=False,
     warningiserror=False,
-    tags=None,
+    tags=["test"],
     verbosity=0,
     jobs=None,
     keep_going=False,
@@ -165,6 +165,9 @@ def build_sphinx(
                 app.config.latex_documents = latex_documents
 
             app.build(force_all, filenames)
+
+            print("MY: App status code", app.statuscode)
+            print("MY: Latex", app.config.latex_documents)
 
             return app.statuscode
 

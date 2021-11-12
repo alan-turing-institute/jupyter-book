@@ -7,6 +7,11 @@ structured.
 Here is a note!
 :::
 
+```{code-cell}
+:tags: [remove-input]
+!jupyter-book create --help
+```
+
 And here is a code block:
 
 ```

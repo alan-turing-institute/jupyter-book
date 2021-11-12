@@ -155,6 +155,7 @@ def build(
     individualpages,
     get_config_only=False,
 ):
+    
     """Convert your book's or page's content to HTML or a PDF."""
     from sphinx_external_toc.parsing import MalformedError, parse_toc_yaml
 
@@ -167,6 +168,7 @@ def build(
     # Paths for the notebooks
     PATH_SRC_FOLDER = Path(path_source).absolute()
 
+    print("Path Folder: ",PATH_SRC_FOLDER)
     config_overrides = {}
     use_external_toc = True
     found_config = find_config_path(PATH_SRC_FOLDER)
@@ -223,13 +225,14 @@ def build(
         }
     # Build Project
     else:
+        print("MY: Build Project: ",PATH_SRC_FOLDER.is_dir())
+        print("MY: Builder: ",builder)
         build_type = "book"
         PAGE_NAME = None
         BUILD_PATH = Path(BUILD_PATH).joinpath("_build")
 
         # Table of contents
         toc = PATH_SRC_FOLDER.joinpath("_toc.yml") if toc is None else Path(toc)
-
         if not get_config_only:
 
             if not toc.exists():
@@ -251,6 +254,7 @@ def build(
             # TODO could also check/warn if the format is not set to jb-article/jb-book?
 
         config_overrides["external_toc_path"] = toc.as_posix()
+        print("MY: Config_overrides:", config_overrides)
 
         # Builder-specific overrides
         if builder == "pdfhtml":
@@ -284,6 +288,8 @@ def build(
     # If we only wan config (e.g. for printing/validation), stop here
     if get_config_only:
         return (path_config, PATH_SRC_FOLDER, config_overrides)
+
+    print ("MY Config: ", path_config, PATH_SRC_FOLDER, config_overrides)
 
     # print information about the build
     click.echo(
@@ -437,7 +443,6 @@ def config():
     """Inspect your _config.yml file."""
     pass
 
-
 @config.command()
 @click.argument("path-source", type=click.Path(exists=True, file_okay=True))
 @click.option(
@@ -527,6 +532,8 @@ def builder_specific_actions(
 
     # Builder-specific options
     if builder == "html":
+        print ("MY: builder is set to: ", builder)
+        print ("MY: cmd_type is set to: ", cmd_type)
         path_output_rel = Path(op.relpath(output_path, Path()))
         if cmd_type == "page":
             path_page = path_output_rel.joinpath(f"{page_name}.html")
